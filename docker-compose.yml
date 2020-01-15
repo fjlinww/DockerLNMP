@@ -1,0 +1,41 @@
+#the compose version, 3.x can fix docker-compose version 1.25.1,
+version: "3.3"
+services:
+#nginx
+  nginx:
+    build: ./nginx
+    image: wdf000/nginx
+    container_name: "LNMP-nginx"
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - php
+    volumes:
+      - ./nginx/config:/etc/nginx/conf.d
+      - ./app:/www
+#php
+  php:
+    build: ./php
+    image: wdf000/php
+    container_name: "LNMP-php"
+    restart: always
+    depends_on:
+      - mysql
+    volumes:
+      - ./app:/www
+#mysql
+  mysql:
+    build: ./mysql
+    image: wdf000/mysql
+    container_name: "LNMP-mysql"
+    restart: always
+    environment: 
+        MYSQL_ROOT_PASSWORD: "root"
+        MYSQL_DATABASE: "lnmp.sql" 
+        MYSQL_USER: "wdf000"
+        MYSQL_PASSWORD: "mysql123456"
+    ports:
+      - 3306:3306
+    volumes: 
+      - ./database:/var/lib/mysql
