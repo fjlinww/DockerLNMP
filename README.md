@@ -42,6 +42,15 @@ $ # 查看docker状态
 $ systemctl status docker
 $ # 启动docker（如果没启动）
 $ sudo systemctl start docker
+
+$ #下载指定版本的docker compose
+$ sudo curl -L https://github.com/docker/compose/releases/download/**1.25.1**/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+$ #为二进制文件添加可执行权限
+$ sudo chmod +x /usr/local/bin/docker-compose
+$ #创建软链接（类似于Windows的快捷方式）
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+$ #检查版本
+$ docker-compose --version
 ```
 - build the containers including nginx, php, and mysql
 ```
