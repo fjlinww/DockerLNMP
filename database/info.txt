@@ -1,2 +1,2 @@
 This folder is used to store database files. 
-Please **delete the info.txt** before start.
+Please delete the info.txt before start.
