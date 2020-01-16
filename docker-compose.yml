@@ -14,6 +14,9 @@ services:
     volumes:
       - ./nginx/config:/etc/nginx/conf.d
       - ./app:/www
+    networks:
+      - lnmp
+
 #php
   php:
     build: ./php
@@ -24,6 +27,11 @@ services:
       - mysql
     volumes:
       - ./app:/www
+    links:
+      - mysql
+    networks:
+      - lnmp
+
 #mysql
   mysql:
     build: ./mysql
@@ -32,10 +40,16 @@ services:
     restart: always
     environment: 
         MYSQL_ROOT_PASSWORD: "root"
-        MYSQL_DATABASE: "lnmp.sql" 
+        MYSQL_DATABASE: "wdf" 
         MYSQL_USER: "wdf000"
-        MYSQL_PASSWORD: "mysql123456"
+        MYSQL_PASSWORD: "123456"
     ports:
       - 3306:3306
     volumes: 
       - ./database:/var/lib/mysql
+    networks:
+      - lnmp
+
+networks:
+  lnmp:
+    driver: bridge
