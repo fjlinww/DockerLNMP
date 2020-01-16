@@ -14,11 +14,12 @@ RUN apt-get update && apt-get install -y \
     libpng-dev 
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install opcache \
+    && docker-php-ext-install mysqli \
+    && rm -r /var/lib/apt/lists/*
 
-RUN apt-get install -y libmemcached-dev zlib1g-dev &&\
-	pecl install redis-5.1.1 memcached &&\  
-	docker-php-ext-enable redis memcached 
-
-COPY ./config/php.ini /usr/local/etc/php/conf.d/
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+COPY ./config/php.ini $PHP_INI_DIR/php.ini
 
