@@ -6,4 +6,10 @@ RUN apt-get update && apt-get install -y \
     nano \
     curl \
     net-tools \
-    iputils-ping
+    iputils-ping \
+    && rm -r /var/lib/apt/lists/*
+
+EXPOSE 8080
+
+WORKDIR /myWebApp
+

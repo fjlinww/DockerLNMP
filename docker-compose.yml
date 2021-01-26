@@ -8,12 +8,12 @@ services:
     container_name: "LNMP-nginx"
     restart: always
     ports:
-      - 8080:80
+      - 8080:8080
     depends_on:
       - php
     volumes:
-      - ./nginx/config:/etc/nginx/conf.d
-      - ./app:/www
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./myWebApp:/myWebApp
     networks:
       - lnmp
 
@@ -26,7 +26,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ./app:/www
+      - ./myWebApp:/myWebApp
     links:
       - mysql
     networks:
@@ -39,9 +39,9 @@ services:
     container_name: "LNMP-mysql"
     restart: always
     environment: 
-        MYSQL_ROOT_PASSWORD: "root"
-        MYSQL_DATABASE: "wdf" 
-        MYSQL_USER: "wdf000"
+        MYSQL_ROOT_PASSWORD: "root@123456"
+        MYSQL_DATABASE: "docker_mysql" 
+        MYSQL_USER: "admin"
         MYSQL_PASSWORD: "123456"
     ports:
       - 3306:3306

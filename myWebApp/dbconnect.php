@@ -1,8 +1,8 @@
 <?php
 
 $servername = "LNMP-mysql";
-$dbName='wdf';
-$username = "wdf000";
+$dbName='docker_mysql';
+$username = "admin";
 $password = "123456";
 
 try {
