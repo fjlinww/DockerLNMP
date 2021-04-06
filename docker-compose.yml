@@ -4,8 +4,8 @@ services:
 #nginx
   nginx:
     build: ./nginx
-    image: wdf000/nginx
-    container_name: "LNMP-nginx"
+    image: wdf000/lnmp-nginx
+    container_name: "lnmp-nginx"
     restart: always
     ports:
       - 8080:8080
@@ -20,8 +20,8 @@ services:
 #php
   php:
     build: ./php
-    image: wdf000/php
-    container_name: "LNMP-php"
+    image: wdf000/lnmp-php
+    container_name: "lnmp-php"
     restart: always
     depends_on:
       - mysql
@@ -35,14 +35,9 @@ services:
 #mysql
   mysql:
     build: ./mysql
-    image: wdf000/mysql
-    container_name: "LNMP-mysql"
+    image: wdf000/lnmp-mysql
+    container_name: "lnmp-mysql"
     restart: always
-    environment: 
-        MYSQL_ROOT_PASSWORD: "root@123456"
-        MYSQL_DATABASE: "docker_mysql" 
-        MYSQL_USER: "admin"
-        MYSQL_PASSWORD: "123456"
     ports:
       - 3306:3306
     volumes: 

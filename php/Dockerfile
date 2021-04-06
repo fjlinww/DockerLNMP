@@ -1,14 +1,8 @@
 FROM php:fpm
 MAINTAINER wdf000
 
-# Time zone
-ENV TZ Asia/Shanghai
-
 RUN apt-get update && apt-get install -y \
     nano \
-    curl \
-    net-tools \
-    iputils-ping \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev
