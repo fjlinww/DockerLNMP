@@ -32,6 +32,21 @@ services:
     networks:
       - lnmp
 
+#phpmyadmin
+#You can use arbitrary servers by adding ENV variable PMA_ARBITRARY=1 to the startup command
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: "lnmp-phpmyadmin"
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - PMA_HOST=lnmp-mysql
+    links:
+      - mysql
+    networks:
+      - lnmp
+
 #mysql
   mysql:
     build: ./mysql
